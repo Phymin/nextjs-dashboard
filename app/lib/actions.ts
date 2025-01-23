@@ -50,7 +50,7 @@ export type State = {
     amount?: string[];
     status?: string[];
   };
-  message?: string | null;
+  message?: string;
 };
 
 export async function createInvoice(prevState: State, formData: FormData) {
@@ -77,8 +77,8 @@ export async function createInvoice(prevState: State, formData: FormData) {
     VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
   `;
   } catch (error) {
+    console.error(error);
     return {
-      errors: error,
       message: "Database Error: Failed to Create Invoice.",
     };
   }
@@ -114,8 +114,8 @@ export async function updateInvoice(
     WHERE id = ${id}
   `;
   } catch (error) {
+    console.error(error);
     return {
-      errors: error,
       message: "Database error: Failed to Update Invoice.",
     };
   }
